@@ -5,17 +5,26 @@ import SeasonsDisplay from './Seasons/SeasonsDisplay';
 // import Segment from './CommentDetails/Segment';
 
 class App extends React.Component {
-    constructor() {
-        window.navigator.geolocation.getCurrentPosition(
-            position => console.log(position),
-            err => console.log(err)
-        )
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            latitude: null
+        }
     }
 
     render() {
+        window.navigator.geolocation.getCurrentPosition(
+            position => {
+                this.setState({ latitude: position.coords.latitude })
+            },
+            err => console.log(err)
+        )
         return (
-            <SeasonsDisplay></SeasonsDisplay >
+            <div>
+                <h1>Lat : {this.state.latitude}</h1>
+                <SeasonsDisplay></SeasonsDisplay >
+            </div>
         )
     }
 }
