@@ -1,31 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import SeasonsDisplay from './Seasons/SeasonsDisplay';
+import Spinner from './Seasons/Spinner';
 // import CommentDetails from './CommentDetails/CommentDetails';
 // import Segment from './CommentDetails/Segment';
 
 class App extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            latitude: null
-        }
+    state = {
+        latitude: null,
+        errorMessage: ''
     }
 
-    render() {
+    componentDidMount() {
+        console.log("Component Did Mount");
         window.navigator.geolocation.getCurrentPosition(
-            position => {
-                this.setState({ latitude: position.coords.latitude })
-            },
-            err => console.log(err)
+            position => this.setState({ latitude: position.coords.latitude }),
+            err => this.setState({ errorMessage: err.message })
         )
-        return (
-            <div>
-                <h1>Lat : {this.state.latitude}</h1>
-                <SeasonsDisplay></SeasonsDisplay >
-            </div>
-        )
+    }
+
+    componentDidUpdate() {
+        console.log("Component Update Mount")
+    }
+
+
+    render() {
+
+        if (this.state.errorMessage && !this.state.latitude) {
+            return <h1>{this.state.errorMessage}</h1>;
+        }
+        if (!this.state.errorMessage && this.state.latitude) {
+            return <SeasonsDisplay lat={this.state.latitude} />
+        }
+        return <Spinner />
+
     }
 }
 

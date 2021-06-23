@@ -1,0 +1,26 @@
+.season-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.season-display h1 {
+    color: #2c4e82;
+}
+
+.icon {
+    color: #4fa96f;
+}
+
+.icon-left {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.icon-right {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
