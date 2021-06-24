@@ -24,8 +24,7 @@ class App extends React.Component {
         console.log("Component Update Mount")
     }
 
-
-    render() {
+    renderBody() {
 
         if (this.state.errorMessage && !this.state.latitude) {
             return <h1>{this.state.errorMessage}</h1>;
@@ -34,7 +33,13 @@ class App extends React.Component {
             return <SeasonsDisplay lat={this.state.latitude} />
         }
         return <Spinner />
+    }
 
+
+    render() {
+        return (
+            <div className="border red">{this.renderBody()}</div>
+        );
     }
 }
 
