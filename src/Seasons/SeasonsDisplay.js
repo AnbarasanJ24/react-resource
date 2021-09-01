@@ -32,6 +32,7 @@ const SeasonsDisplay = ({ lat }) => {
             <i className={`icon-right massive ${iconName} icon`}></i>
 
         </div>
+
     );
 };
 
